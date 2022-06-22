@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+
+import React, { useContext, useState } from 'react';
 import './App.css';
+import { Dropdown } from './components/Dropdown';
+import { Header } from './components/Header';
+import LanguageContext from './context/LanguageContext';
 
 function App() {
+  const [language, setLanguage] = useState('en')
+  function es() {
+    setLanguage('es')
+  }
+  function en() {
+    setLanguage('en')
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <React.Fragment>
+        <LanguageContext.Provider value={{language: language, en: en, es: es}}>
+          <Header/>
+          <Dropdown/>
+        </LanguageContext.Provider>
+      </React.Fragment>
     </div>
   );
 }
